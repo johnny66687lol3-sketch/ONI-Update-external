@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONI External | Professional Enhancement</title>
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --panel-bg: #1a1a1a;
+            --accent-color: #d11a2a;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: var(--panel-bg);
+            border-bottom: 1px solid #333;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+        }
+
+        .lang-switch select {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            border: 1px solid #333;
+            padding: 5px 10px;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(180deg, var(--panel-bg) 0%, var(--bg-color) 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: var(--text-main);
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 50px 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: var(--panel-bg);
+            padding: 30px;
+            border-radius: 8px;
+            width: 300px;
+            border-top: 3px solid var(--accent-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">ONI Club</div>
+        <div class="lang-switch">
+            <select id="languageSelect" onchange="changeLanguage()">
+                <option value="en" selected>English</option>
+                <option value="zh">繁體中文</option>
+            </select>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1><span data-i18n="heroTitlePrefix">Welcome to</span> <span>ONI External</span></h1>
+        <p data-i18n="heroDesc">Providing the most stable system integration and visual assistance, fully customize your gaming experience.</p>
+        <a href="https://discord.com/invite/ehsESZPQzj" target="_blank" class="btn">
+            <span data-i18n="btnText">Join Discord to Download</span>
+        </a>
+    </header>
+
+    <section class="features">
+        <div class="card">
+            <h3 data-i18n="feat1Title">Precise Aimbot</h3>
+            <p data-i18n="feat1Desc">Supports custom FOV ranges and target bone selection, providing smooth mouse prediction and compensation.</p>
+        </div>
+        <div class="card">
+            <h3 data-i18n="feat2Title">Customizable Visuals</h3>
+            <p data-i18n="feat2Desc">Clear visual overlays that do not interfere with the native screen, allowing you to accurately grasp environmental info.</p>
+        </div>
+        <div class="card">
+            <h3 data-i18n="feat3Title">Configs System</h3>
+            <p data-i18n="feat3Desc">Supports quick switching between multiple profiles, applying optimized parameters for different scenarios with one click.</p>
+        </div>
+    </section>
+
+    <script>
+        const translations = {
+            "en": {
+                "heroTitlePrefix": "Welcome to",
+                "heroDesc": "Providing the most stable system integration and visual assistance, fully customize your gaming experience.",
+                "btnText": "Join Discord to Download",
+                "feat1Title": "Precise Aimbot",
+                "feat1Desc": "Supports custom FOV ranges and target bone selection, providing smooth mouse prediction and compensation.",
+                "feat2Title": "Customizable Visuals",
+                "feat2Desc": "Clear visual overlays that do not interfere with the native screen, allowing you to accurately grasp environmental info.",
+                "feat3Title": "Configs System",
+                "feat3Desc": "Supports quick switching between multiple profiles, applying optimized parameters for different scenarios with one click."
+            },
+            "zh": {
+                "heroTitlePrefix": "Welcome to",
+                "heroDesc": "提供最穩定的系統整合與視覺輔助功能，完全自定義你的遊戲體驗。",
+                "btnText": "加入 Discord 下載",
+                "feat1Title": "精準 Aimbot",
+                "feat1Desc": "支援自訂 FOV 範圍與目標部位選擇 (Head, Chest)，提供平滑的滑鼠預測與補償。",
+                "feat2Title": "高自訂性 Visuals",
+                "feat2Desc": "清晰的視覺覆蓋層，不干擾原生畫面，精準掌握環境資訊。",
+                "feat3Title": "Configs 系統",
+                "feat3Desc": "支援多組設定檔快速切換，針對不同情境一鍵套用最佳化參數。"
+            }
+        };
+
+        function changeLanguage() {
+            const lang = document.getElementById("languageSelect").value;
+            const elements = document.querySelectorAll("[data-i18n]");
+            
+            elements.forEach(el => {
+                const key = el.getAttribute("data-i18n");
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
