@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ONI External | Professional Enhancement</title>
-    <!-- 引入現代化字體 -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -102,10 +101,11 @@
             opacity: 0;
             transform: translateX(-15px);
             white-space: nowrap;
+            color: var(--accent-color); /* 讓外層的 "Club" 變成紅色 */
         }
 
         .logo-text.full span {
-            color: var(--accent-color);
+            color: var(--text-main); /* 讓內層 span 的 "ONI" 變成白色 */
         }
 
         /* 懸浮時的文字切換動畫 */
@@ -284,7 +284,6 @@
 <body>
 
     <nav>
-        <!-- 更新後的 Logo 區塊 -->
         <div class="logo-container">
             <img src="https://github.com/johnny66687lol3-sketch/ONI/blob/main/ONI%20Club.jpg?raw=true" alt="ONI Logo" class="logo-img">
             <div class="logo-text-wrapper">
@@ -305,7 +304,7 @@
         <h1><span data-i18n="heroTitlePrefix">Welcome to</span> <span class="highlight">ONI External</span></h1>
         <p data-i18n="heroDesc">Providing the most stable system integration and visual assistance, fully customize your gaming experience.</p>
         <a href="https://github.com/johnny66687lol3-sketch/ONI-Update-external/raw/refs/heads/main/ONI_External.exe" target="_blank" class="btn">
-            <span data-i18n="btnText">Join Discord to Download</span>
+            <span data-i18n="btnText">Download</span>
         </a>
     </header>
 
