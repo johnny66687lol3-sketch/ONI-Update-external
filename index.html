@@ -8,14 +8,14 @@
     <style>
         :root {
             --bg-color: #050507;
-            --nav-bg: rgba(5, 5, 7, 0.75);
-            --card-bg: rgba(15, 15, 18, 0.6);
+            --nav-bg: rgba(5, 5, 7, 0.85);
+            --card-bg: rgba(15, 15, 18, 0.7);
             --accent-red: #e52e3d;
             --accent-glow: rgba(229, 46, 61, 0.4);
             --text-main: #ffffff;
             --text-muted: #8b8b93;
-            --border-light: rgba(255, 255, 255, 0.06);
-            --border-hover: rgba(229, 46, 61, 0.5);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(229, 46, 61, 0.6);
         }
 
         * {
@@ -31,8 +31,8 @@
             line-height: 1.6;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(229, 46, 61, 0.08) 0%, transparent 60%),
-                radial-gradient(circle at 10% 80%, rgba(229, 46, 61, 0.04) 0%, transparent 40%);
+                radial-gradient(circle at 50% 0%, rgba(229, 46, 61, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 10% 80%, rgba(229, 46, 61, 0.05) 0%, transparent 40%);
         }
 
         /* 滾動條美化 */
@@ -47,8 +47,8 @@
             align-items: center;
             padding: 15px 8%;
             background: var(--nav-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -142,16 +142,17 @@
         }
 
         .nav-link:hover {
-            color: #5865F2;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
         /* ----- 語言切換 ----- */
         .lang-switch select {
-            background-color: rgba(255, 255, 255, 0.02);
+            background-color: rgba(255, 255, 255, 0.05);
             color: var(--text-main);
             border: 1px solid var(--border-light);
             padding: 8px 16px;
-            border-radius: 4px;
+            border-radius: 6px;
             outline: none;
             cursor: pointer;
             font-size: 0.85rem;
@@ -164,7 +165,7 @@
 
         .lang-switch select:hover {
             border-color: var(--accent-red);
-            background-color: rgba(229, 46, 61, 0.05);
+            background-color: rgba(229, 46, 61, 0.1);
             box-shadow: 0 0 15px var(--accent-glow);
         }
 
@@ -176,7 +177,7 @@
         /* ----- Hero 區塊 ----- */
         .hero {
             text-align: center;
-            padding: 120px 20px 80px;
+            padding: 100px 20px 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -197,9 +198,9 @@
         }
 
         .hero h1 {
-            font-size: 5rem;
+            font-size: 4.5rem;
             font-weight: 900;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             line-height: 1;
             letter-spacing: -2px;
             text-transform: uppercase;
@@ -216,50 +217,15 @@
             color: var(--text-muted);
             max-width: 600px;
             margin: 0 auto 40px;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 400;
             line-height: 1.8;
-        }
-
-        /* ----- 下載按鈕 ----- */
-        .btn-primary {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #e52e3d 0%, #a6121f 100%);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 16px 56px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 800;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(229, 46, 61, 0.3);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(229, 46, 61, 0.5);
-            background: linear-gradient(135deg, #ff3b4a 0%, #c41525 100%);
-        }
-
-        .btn-sub {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 4px;
-            letter-spacing: 1px;
         }
 
         /* ----- UI 截圖展示區塊 ----- */
         .ui-showcase {
             max-width: 1300px;
-            margin: 0 auto 100px;
+            margin: 0 auto 80px;
             padding: 0 5%;
             display: flex;
             gap: 30px;
@@ -330,9 +296,9 @@
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 25px;
             padding: 0 8% 80px;
-            max-width: 1400px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
@@ -340,61 +306,24 @@
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 40px;
-            border-radius: 8px;
+            padding: 35px;
+            border-radius: 12px;
             border: 1px solid var(--border-light);
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .card-number {
-            position: absolute;
-            top: -20px;
-            right: 10px;
-            font-size: 6rem;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.02);
-            z-index: 0;
-            pointer-events: none;
-            transition: color 0.4s ease;
-        }
-
-        .card:hover .card-number {
-            color: rgba(229, 46, 61, 0.05);
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
         .card:hover {
             transform: translateY(-5px);
-            border-color: rgba(229, 46, 61, 0.3);
-            background: rgba(25, 25, 30, 0.8);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card h3, .card p {
-            position: relative;
-            z-index: 1;
+            border-color: rgba(229, 46, 61, 0.4);
+            box-shadow: 0 10px 30px rgba(229, 46, 61, 0.1);
         }
 
         .card h3 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 800;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             color: var(--text-main);
             display: flex;
             align-items: center;
@@ -415,19 +344,148 @@
 
         .card p {
             color: var(--text-muted);
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.7;
+        }
+
+        /* ----- 方案選擇 (Pricing) 區塊 ----- */
+        .pricing-section {
+            padding: 80px 8%;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .pricing-section h2 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 40px 25px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-red);
+            box-shadow: 0 20px 40px rgba(229, 46, 61, 0.15);
+            background: rgba(20, 20, 25, 0.8);
+        }
+
+        .pricing-card.popular {
+            border-color: rgba(229, 46, 61, 0.5);
+            background: linear-gradient(180deg, rgba(229, 46, 61, 0.05) 0%, rgba(15, 15, 18, 0.8) 100%);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-red);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px var(--accent-glow);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .pricing-card .price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .pricing-card .desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .btn-buy {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-buy.outline {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-buy.outline:hover {
+            border-color: var(--accent-red);
+            background: rgba(229, 46, 61, 0.1);
+            color: var(--accent-red);
+        }
+
+        .btn-buy.filled {
+            background: linear-gradient(135deg, #e52e3d 0%, #a6121f 100%);
+            color: #fff;
+            border: none;
+            box-shadow: 0 5px 20px rgba(229, 46, 61, 0.3);
+        }
+
+        .btn-buy.filled:hover {
+            box-shadow: 0 8px 30px rgba(229, 46, 61, 0.5);
+            transform: translateY(-2px);
         }
 
         /* ----- 底端 Discord 區塊 ----- */
         .discord-section {
             text-align: center;
             padding: 90px 20px;
-            background: linear-gradient(180deg, transparent, rgba(88, 101, 242, 0.04));
+            background: linear-gradient(180deg, transparent, rgba(88, 101, 242, 0.05));
             border-top: 1px solid var(--border-light);
             max-width: 1400px;
             margin: 0 auto;
-            width: 100%;
         }
 
         .discord-section h2 {
@@ -452,16 +510,13 @@
             justify-content: center;
             background: #5865F2;
             color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 14px 44px;
             text-decoration: none;
             font-size: 1.1rem;
             font-weight: 800;
-            border-radius: 4px;
+            border-radius: 8px;
             transition: all 0.3s ease;
-            cursor: pointer;
             box-shadow: 0 10px 25px rgba(88, 101, 242, 0.25);
-            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
@@ -480,7 +535,6 @@
             transform: rotate(-5deg) scale(1.1);
         }
 
-        /* ----- Footer ----- */
         footer {
             text-align: center;
             padding: 40px;
@@ -492,15 +546,10 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3.5rem; }
-            .hero p { font-size: 1rem; }
+            .hero h1 { font-size: 3rem; }
+            .pricing-section h2 { font-size: 2.2rem; }
             nav { padding: 15px 5%; }
-            .features { padding: 0 5% 60px; }
-            .discord-section { padding: 60px 20px; }
-            .discord-section h2 { font-size: 2rem; }
-            .logo-text-wrapper { min-width: 120px; }
-            .logo-text { font-size: 1.2rem; }
-            .logo-img { width: 35px; height: 35px; }
+            .nav-right a { display: none; } 
         }
     </style>
 </head>
@@ -516,6 +565,7 @@
         </div>
         
         <div class="nav-right">
+            <a href="#pricing" class="nav-link" data-i18n="navStore">Store</a>
             <a href="https://discord.gg/FTnskZvg6y" target="_blank" class="nav-link">Discord</a>
             <div class="lang-switch">
                 <select id="languageSelect" onchange="changeLanguage()">
@@ -533,10 +583,6 @@
             <span class="highlight" data-i18n="heroTitleHighlight">PERFORMANCE.</span>
         </h1>
         <p data-i18n="heroDesc">The most stable visual and aim enhancement tool. Designed for absolute precision, uncompromised safety, and ultimate smooth mouse compensation.</p>
-        <a href="https://github.com/johnny66687lol3-sketch/ONI-Update-external/raw/refs/heads/main/ONI_External.exe" target="_blank" class="btn-primary">
-            <span data-i18n="btnText">DOWNLOAD NOW</span>
-            <span class="btn-sub" data-i18n="btnSub">Safe & Undetected</span>
-        </a>
     </header>
 
     <section class="ui-showcase">
@@ -566,19 +612,52 @@
 
     <section class="features">
         <div class="card">
-            <div class="card-number">01</div>
             <h3 data-i18n="feat1Title">PRECISE AIMBOT</h3>
-            <p data-i18n="feat1Desc">Customizable FOV ranges and target bone selection. Advanced curve smoothing for seamless mouse prediction and compensation.</p>
+            <p data-i18n="feat1Desc">Customizable FOV ranges and target bone selection. Advanced curve smoothing for seamless mouse prediction.</p>
         </div>
         <div class="card">
-            <div class="card-number">02</div>
             <h3 data-i18n="feat2Title">CLEAN VISUALS</h3>
-            <p data-i18n="feat2Desc">Optimized high-refresh-rate external overlay that does not drop your frames or interfere with the native screen rendering.</p>
+            <p data-i18n="feat2Desc">Optimized high-refresh-rate external overlay that does not drop your frames.</p>
         </div>
         <div class="card">
-            <div class="card-number">03</div>
             <h3 data-i18n="feat3Title">CLOUD CONFIGS</h3>
-            <p data-i18n="feat3Desc">Instantly switch between playstyles. Load and save optimized parameters for different scenarios with a single click.</p>
+            <p data-i18n="feat3Desc">Instantly switch between playstyles. Load and save optimized parameters with a single click.</p>
+        </div>
+    </section>
+
+    <section class="pricing-section" id="pricing">
+        <h2 data-i18n="pricingTitle">CHOOSE YOUR PLAN</h2>
+        <div class="pricing-grid">
+            
+            <div class="pricing-card">
+                <h3 data-i18n="planFree">FREE</h3>
+                <div class="price">$0</div>
+                <p class="desc" data-i18n="planFreeDesc">Requires Key System to access basic features. Ad-supported.</p>
+                <a href="https://linkvertise.com/6685298/0ENoDezHrfmz?o=sharing" target="_blank" class="btn-buy outline" data-i18n="btnGetKey">GET KEY</a>
+            </div>
+
+            <div class="pricing-card">
+                <h3 data-i18n="planWeek">1 WEEK</h3>
+                <div class="price">$3.89 <span>/ week</span></div>
+                <p class="desc" data-i18n="planWeekDesc">7 days of full premium access. Perfect for trying out all features.</p>
+                <a href="https://discord.gg/FTnskZvg6y" target="_blank" class="btn-buy outline" data-i18n="btnPurchase">PURCHASE</a>
+            </div>
+
+            <div class="pricing-card">
+                <h3 data-i18n="planMonth">1 MONTH</h3>
+                <div class="price">$10.28 <span>/ month</span></div>
+                <p class="desc" data-i18n="planMonthDesc">30 days of full premium access. Best value for regular users.</p>
+                <a href="https://discord.gg/FTnskZvg6y" target="_blank" class="btn-buy outline" data-i18n="btnPurchase">PURCHASE</a>
+            </div>
+
+            <div class="pricing-card popular">
+                <div class="pricing-badge" data-i18n="badgePopular">MOST POPULAR</div>
+                <h3 data-i18n="planLifetime">LIFETIME</h3>
+                <div class="price">$16.67 <span>/ one-time</span></div>
+                <p class="desc" data-i18n="planLifetimeDesc">Pay once, enjoy forever. Permanent access to all current and future updates.</p>
+                <a href="https://discord.gg/FTnskZvg6y" target="_blank" class="btn-buy filled" data-i18n="btnPurchase">PURCHASE</a>
+            </div>
+
         </div>
     </section>
 
@@ -598,39 +677,61 @@
     <script>
         const translations = {
             "en": {
+                "navStore": "Store",
                 "heroBadge": "V1 EXTERNAL RELEASED",
                 "heroTitlePrefix": "PURE",
                 "heroTitleHighlight": "PERFORMANCE.",
                 "heroDesc": "The most stable visual and aim enhancement tool. Designed for absolute precision, uncompromised safety, and ultimate smooth mouse compensation.",
-                "btnText": "DOWNLOAD NOW",
-                "btnSub": "Safe & Undetected",
                 "loaderTitle": "LOADER INTERFACE",
                 "menuTitle": "MAIN INTERFACE",
                 "feat1Title": "PRECISE AIMBOT",
-                "feat1Desc": "Customizable FOV ranges and target bone selection. Advanced curve smoothing for seamless mouse prediction and compensation.",
+                "feat1Desc": "Customizable FOV ranges and target bone selection. Advanced curve smoothing for seamless mouse prediction.",
                 "feat2Title": "CLEAN VISUALS",
-                "feat2Desc": "Optimized high-refresh-rate external overlay that does not drop your frames or interfere with the native screen rendering.",
-                "feat3Title": "CLOUD CONFIGS",
-                "feat3Desc": "Instantly switch between playstyles. Load and save optimized parameters for different scenarios with a single click.",
+                "feat2Desc": "Optimized high-refresh-rate external overlay that does not drop your frames.",
+                "feat3Title": "FAST UPDATE ",
+                "feat3Desc": "Game patches happen. We ship a fix within hours, often the same day.",
+                "pricingTitle": "CHOOSE YOUR PLAN",
+                "planFree": "FREE",
+                "planFreeDesc": "Requires Key System to access basic features. Ad-supported.",
+                "btnGetKey": "GET KEY",
+                "planWeek": "1 WEEK",
+                "planWeekDesc": "7 days of full premium access. Perfect for trying out all features.",
+                "planMonth": "1 MONTH",
+                "planMonthDesc": "30 days of full premium access. Best value for regular users.",
+                "badgePopular": "MOST POPULAR",
+                "planLifetime": "LIFETIME",
+                "planLifetimeDesc": "Pay once, enjoy forever. Permanent access to all current and future updates.",
+                "btnPurchase": "PURCHASE",
                 "discordTitle": "JOIN OUR COMMUNITY",
                 "discordDesc": "Get instant updates, marketplace announcements, direct support, and connect with thousands of other ONI users.",
                 "discordBtnText": "JOIN DISCORD SERVER"
             },
             "zh": {
+                "navStore": "商店",
                 "heroBadge": "V1 EXTERNAL 全新發布",
                 "heroTitlePrefix": "極致",
                 "heroTitleHighlight": "效能展現",
                 "heroDesc": "提供最穩定的系統整合與視覺輔助功能。專為絕對精準、毫秒級滑鼠平滑補償與毫不妥協的安全性而生。",
-                "btnText": "立即下載",
-                "btnSub": "安全無毒 · 穩定防封",
                 "loaderTitle": "載入器介面",
                 "menuTitle": "主選單介面",
                 "feat1Title": "精準平滑 Aimbot",
-                "feat1Desc": "支援自訂 FOV 範圍與目標部位選擇。搭載進階平滑曲線，提供最真實的滑鼠預測與無縫補償。",
+                "feat1Desc": "支援自訂 FOV 範圍與目標部位選擇。搭載進階平滑曲線，提供最真實的滑鼠預測。",
                 "feat2Title": "高幀率 Visuals",
-                "feat2Desc": "極低延遲的外部視覺覆蓋層，支援高更新率螢幕，完全不干擾原生遊戲畫面，精準掌握戰局資訊。",
-                "feat3Title": "雲端 Configs 系統",
-                "feat3Desc": "支援多組設定檔快速切換，一鍵無縫套用不同情境的最佳化參數，隨時應戰。",
+                "feat2Desc": "極低延遲的外部視覺覆蓋層，支援高更新率螢幕，完全不干擾原生遊戲畫面。",
+                "feat3Title": "快速更新",
+                "feat3Desc": "遊戲補丁會定期發布。我們會在數小時內，通常當天就會發布修復程序。",
+                "pricingTitle": "選擇你的方案",
+                "planFree": "免費方案",
+                "planFreeDesc": "要用鑰匙系統才可以用。Key將會重置在每個禮拜五。",
+                "btnGetKey": "獲取鑰匙",
+                "planWeek": "One Week 方案",
+                "planWeekDesc": "7 天完整高級權限，適合短期體驗所有功能。",
+                "planMonth": "One Month 方案",
+                "planMonthDesc": "30 天完整高級權限，最受常規玩家歡迎的選擇。",
+                "badgePopular": "最受歡迎",
+                "planLifetime": "LIFETIME 方案",
+                "planLifetimeDesc": "一次付費，永久使用。享有未來所有版本更新。",
+                "btnPurchase": "立即購買",
                 "discordTitle": "加入官方社群",
                 "discordDesc": "獲取即時更新通知、版本公告、直接的技術支援，並與數千名 ONI 玩家一齊交流體驗。",
                 "discordBtnText": "加入 DISCORD 伺服器"
@@ -652,6 +753,11 @@
                 }
             });
         }
+        
+        // 初始載入語言
+        document.addEventListener('DOMContentLoaded', () => {
+            changeLanguage();
+        });
     </script>
 </body>
 </html>
