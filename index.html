@@ -3,761 +3,399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ONI External | Professional Enhancement</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <title>ONI Club Dashboard</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --bg-color: #050507;
-            --nav-bg: rgba(5, 5, 7, 0.85);
-            --card-bg: rgba(15, 15, 18, 0.7);
-            --accent-red: #e52e3d;
-            --accent-glow: rgba(229, 46, 61, 0.4);
-            --text-main: #ffffff;
-            --text-muted: #8b8b93;
-            --border-light: rgba(255, 255, 255, 0.08);
-            --border-hover: rgba(229, 46, 61, 0.6);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-        }
-
+        /* 自定義滾動條與紅色發光特效 */
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(229, 46, 61, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 10% 80%, rgba(229, 46, 61, 0.05) 0%, transparent 40%);
+            background-color: #0d0000; /* 深邃紅黑色 */
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        /* 滾動條美化 */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: rgba(229, 46, 61, 0.3); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-red); }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 8%;
-            background: var(--nav-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-light);
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.4); /* 紅色發光 */
         }
-
-        /* ----- 左上角 Logo 區塊樣式 ----- */
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            cursor: pointer;
+        .bg-glass {
+            background: rgba(25, 5, 5, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(220, 38, 38, 0.2);
         }
-
-        .logo-img {
-            width: 45px;
-            height: 45px;
-            border-radius: 8px;
-            object-fit: cover;
-            box-shadow: 0 0 15px rgba(229, 46, 61, 0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid var(--border-light);
-        }
-
-        .logo-container:hover .logo-img {
-            transform: scale(1.05) rotate(-3deg);
-            box-shadow: 0 0 25px rgba(229, 46, 61, 0.5);
-            border-color: var(--accent-red);
-        }
-
-        .logo-text-wrapper {
-            position: relative;
-            height: 30px;
-            min-width: 140px;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--text-main);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            position: absolute;
-            left: 0;
-            transition: all 0.3s ease;
-        }
-
-        .logo-text.short {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .logo-text.full {
-            opacity: 0;
-            transform: translateX(-15px);
-            white-space: nowrap;
-            color: var(--accent-red);
-        }
-
-        .logo-text.full span {
-            color: var(--text-main);
-        }
-
-        .logo-container:hover .logo-text.short {
-            opacity: 0;
-            transform: translateX(15px);
-        }
-
-        .logo-container:hover .logo-text.full {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* ----- 導覽列右側排版 ----- */
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-
-        .nav-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-            text-transform: uppercase;
-        }
-
-        .nav-link:hover {
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.3);
-        }
-
-        /* ----- 語言切換 ----- */
-        .lang-switch select {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--text-main);
-            border: 1px solid var(--border-light);
-            padding: 8px 16px;
-            border-radius: 6px;
-            outline: none;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            appearance: none;
-            -webkit-appearance: none;
-        }
-
-        .lang-switch select:hover {
-            border-color: var(--accent-red);
-            background-color: rgba(229, 46, 61, 0.1);
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
-
-        .lang-switch select option {
-            background-color: #0a0a0c;
-            color: #fff;
-        }
-
-        /* ----- Hero 區塊 ----- */
-        .hero {
-            text-align: center;
-            padding: 100px 20px 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-        }
-
-        .badge {
-            background: rgba(229, 46, 61, 0.1);
-            color: var(--accent-red);
-            border: 1px solid var(--accent-glow);
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
-
-        .hero h1 {
-            font-size: 4.5rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            line-height: 1;
-            letter-spacing: -2px;
-            text-transform: uppercase;
-        }
-
-        .hero h1 .highlight {
-            background: linear-gradient(135deg, #ff4b5a 0%, #a6121f 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 40px;
-            font-size: 1.1rem;
-            font-weight: 400;
-            line-height: 1.8;
-        }
-
-        /* ----- UI 截圖展示區塊 ----- */
-        .ui-showcase {
-            max-width: 1300px;
-            margin: 0 auto 80px;
-            padding: 0 5%;
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
-
-        .ui-box {
-            flex: 1;
-            min-width: 320px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            transition: transform 0.4s ease, border-color 0.4s ease;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        .ui-box:hover {
-            transform: translateY(-8px);
-            border-color: var(--border-hover);
-            box-shadow: 0 25px 60px rgba(229, 46, 61, 0.15);
-        }
-
-        .ui-box-header {
-            background: rgba(8, 8, 10, 0.9);
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border-light);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .dot { width: 10px; height: 10px; border-radius: 50%; }
-        .dot.red { background: #ff5f56; }
-        .dot.yellow { background: #ffbd2e; }
-        .dot.green { background: #27c93f; }
-
-        .ui-title {
-            margin-left: auto;
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-        }
-
-        .img-wrapper {
-            background: #000;
-            padding: 0;
-            width: 100%;
-        }
-
-        .img-wrapper img {
-            width: 100%;
-            display: block;
-            opacity: 0.85;
-            transition: opacity 0.4s ease;
-        }
-
-        .ui-box:hover .img-wrapper img {
-            opacity: 1;
-        }
-
-        /* ----- 功能介紹區塊 ----- */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 0 8% 80px;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 35px;
-            border-radius: 12px;
-            border: 1px solid var(--border-light);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(229, 46, 61, 0.4);
-            box-shadow: 0 10px 30px rgba(229, 46, 61, 0.1);
-        }
-
-        .card h3 {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 12px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .card h3::before {
-            content: '';
-            display: inline-block;
+        /* 自定義滾動條 */
+        ::-webkit-scrollbar {
             width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent-red);
-            box-shadow: 0 0 10px var(--accent-glow);
         }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.7;
+        ::-webkit-scrollbar-track {
+            background: #0d0000;
         }
-
-        /* ----- 方案選擇 (Pricing) 區塊 ----- */
-        .pricing-section {
-            padding: 80px 8%;
-            max-width: 1400px;
-            margin: 0 auto;
-            text-align: center;
+        ::-webkit-scrollbar-thumb {
+            background: #7f1d1d;
+            border-radius: 4px;
         }
-
-        .pricing-section h2 {
-            font-size: 2.8rem;
-            font-weight: 900;
-            letter-spacing: -1px;
-            margin-bottom: 50px;
-            text-transform: uppercase;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
-            align-items: stretch;
-        }
-
-        .pricing-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            padding: 40px 25px;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(12px);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-red);
-            box-shadow: 0 20px 40px rgba(229, 46, 61, 0.15);
-            background: rgba(20, 20, 25, 0.8);
-        }
-
-        .pricing-card.popular {
-            border-color: rgba(229, 46, 61, 0.5);
-            background: linear-gradient(180deg, rgba(229, 46, 61, 0.05) 0%, rgba(15, 15, 18, 0.8) 100%);
-        }
-
-        .pricing-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent-red);
-            color: #fff;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            box-shadow: 0 5px 15px var(--accent-glow);
-        }
-
-        .pricing-card h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .pricing-card .price {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        .pricing-card .price span {
-            font-size: 1rem;
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        .pricing-card .desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            flex-grow: 1;
-        }
-
-        .btn-buy {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .btn-buy.outline {
-            background: transparent;
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-buy.outline:hover {
-            border-color: var(--accent-red);
-            background: rgba(229, 46, 61, 0.1);
-            color: var(--accent-red);
-        }
-
-        .btn-buy.filled {
-            background: linear-gradient(135deg, #e52e3d 0%, #a6121f 100%);
-            color: #fff;
-            border: none;
-            box-shadow: 0 5px 20px rgba(229, 46, 61, 0.3);
-        }
-
-        .btn-buy.filled:hover {
-            box-shadow: 0 8px 30px rgba(229, 46, 61, 0.5);
-            transform: translateY(-2px);
-        }
-
-        /* ----- 底端 Discord 區塊 ----- */
-        .discord-section {
-            text-align: center;
-            padding: 90px 20px;
-            background: linear-gradient(180deg, transparent, rgba(88, 101, 242, 0.05));
-            border-top: 1px solid var(--border-light);
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .discord-section h2 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            letter-spacing: -1px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .discord-section p {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 35px;
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        .btn-discord {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: #5865F2;
-            color: #fff;
-            padding: 14px 44px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 800;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(88, 101, 242, 0.25);
-            text-transform: uppercase;
-        }
-
-        .btn-discord:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(88, 101, 242, 0.45);
-            background: #4752C4;
-        }
-
-        .btn-discord svg {
-            margin-right: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        .btn-discord:hover svg {
-            transform: rotate(-5deg) scale(1.1);
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid var(--border-light);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .pricing-section h2 { font-size: 2.2rem; }
-            nav { padding: 15px 5%; }
-            .nav-right a { display: none; } 
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b91c1c;
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex items-center justify-center relative overflow-hidden text-gray-200">
 
-    <nav>
-        <div class="logo-container">
-            <img src="https://github.com/johnny66687lol3-sketch/ONI/blob/main/ONI%20Club.jpg?raw=true" alt="ONI Logo" class="logo-img">
-            <div class="logo-text-wrapper">
-                <div class="logo-text short">OC</div>
-                <div class="logo-text full"><span>ONI</span> Club</div>
-            </div>
+    <!-- 背景裝飾 (紅色系) -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-red-700 rounded-full blur-[120px] opacity-20"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-orange-700 rounded-full blur-[120px] opacity-10"></div>
+    </div>
+
+    <!-- 語言切換按鈕 -->
+    <div class="absolute top-4 right-4 z-50">
+        <select id="lang-switch" class="bg-red-950 border border-red-800 text-white text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 outline-none transition-all">
+            <option value="en">English</option>
+            <option value="zh">繁體中文</option>
+        </select>
+    </div>
+
+    <!-- 登入介面 (Auth View) -->
+    <div id="auth-view" class="w-full max-w-md bg-glass p-8 rounded-2xl glow-effect transition-all duration-500">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-red-700" id="t-title">
+                ONI Club
+            </h1>
+            <p class="text-gray-400 mt-2 text-sm font-medium tracking-widest uppercase" id="t-subtitle">Authentication Portal</p>
         </div>
         
-        <div class="nav-right">
-            <a href="#pricing" class="nav-link" data-i18n="navStore">Store</a>
-            <a href="https://discord.gg/FTnskZvg6y" target="_blank" class="nav-link">Discord</a>
-            <div class="lang-switch">
-                <select id="languageSelect" onchange="changeLanguage()">
-                    <option value="en" selected>EN</option>
-                    <option value="zh">繁體中文</option>
-                </select>
+        <div class="space-y-6">
+            <div>
+                <label class="block text-sm font-medium text-red-200 mb-2" id="t-enterKey">Enter your License Key</label>
+                <input type="text" id="key-input" placeholder="ONI_XXXXX..." 
+                    class="w-full bg-black/60 border border-red-900/50 rounded-lg px-4 py-3 text-red-100 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all font-mono text-sm shadow-inner">
             </div>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <div class="badge" data-i18n="heroBadge">V1 EXTERNAL RELEASED</div>
-        <h1>
-            <span data-i18n="heroTitlePrefix">PURE</span><br/>
-            <span class="highlight" data-i18n="heroTitleHighlight">PERFORMANCE.</span>
-        </h1>
-        <p data-i18n="heroDesc">The most stable visual and aim enhancement tool. Designed for absolute precision, uncompromised safety, and ultimate smooth mouse compensation.</p>
-    </header>
-
-    <section class="ui-showcase">
-        <div class="ui-box">
-            <div class="ui-box-header">
-                <span class="dot red"></span>
-                <span class="dot yellow"></span>
-                <span class="dot green"></span>
-                <span class="ui-title" data-i18n="loaderTitle">LOADER INTERFACE</span>
-            </div>
-            <div class="img-wrapper">
-                <img src="https://raw.githubusercontent.com/johnny66687lol3-sketch/ONI-Update-external/refs/heads/main/oni%20loader2.png" alt="Loader UI">
-            </div>
-        </div>
-        <div class="ui-box">
-            <div class="ui-box-header">
-                <span class="dot red"></span>
-                <span class="dot yellow"></span>
-                <span class="dot green"></span>
-                <span class="ui-title" data-i18n="menuTitle">MAIN INTERFACE</span>
-            </div>
-            <div class="img-wrapper">
-                <img src="https://raw.githubusercontent.com/johnny66687lol3-sketch/ONI-Update-external/refs/heads/main/oni%20external.png" alt="Main UI">
-            </div>
-        </div>
-    </section>
-
-    <section class="features">
-        <div class="card">
-            <h3 data-i18n="feat1Title">PRECISE AIMBOT</h3>
-            <p data-i18n="feat1Desc">Customizable FOV ranges and target bone selection. Advanced curve smoothing for seamless mouse prediction.</p>
-        </div>
-        <div class="card">
-            <h3 data-i18n="feat2Title">CLEAN VISUALS</h3>
-            <p data-i18n="feat2Desc">Optimized high-refresh-rate external overlay that does not drop your frames.</p>
-        </div>
-        <div class="card">
-            <h3 data-i18n="feat3Title">FAST UPDATE</h3>
-            <p data-i18n="feat3Desc">Game patches happen. We ship a fix within hours, often the same day.</p>
-        </div>
-    </section>
-
-    <section class="pricing-section" id="pricing">
-        <h2 data-i18n="pricingTitle">CHOOSE YOUR PLAN</h2>
-        <div class="pricing-grid">
             
-            <div class="pricing-card">
-                <h3 data-i18n="planFree">FREE</h3>
-                <div class="price">$0</div>
-                <p class="desc" data-i18n="planFreeDesc">Requires Key System to access basic features. Ad-supported.</p>
-                <a href="https://linkvertise.com/6685298/0ENoDezHrfmz?o=sharing" target="_blank" class="btn-buy outline" data-i18n="btnGetKey">GET KEY</a>
-            </div>
+            <p id="error-msg" class="text-red-500 text-sm hidden font-bold"></p>
 
-            <div class="pricing-card">
-                <h3 data-i18n="planWeek">1 WEEK</h3>
-                <div class="price">$3.89 <span>/ week</span></div>
-                <p class="desc" data-i18n="planWeekDesc">7 days of full premium access. Perfect for trying out all features.</p>
-                <a href="https://discord.gg/FTnskZvg6y" target="_blank" class="btn-buy outline" data-i18n="btnPurchase">PURCHASE</a>
-            </div>
+            <button onclick="authenticate()" 
+                class="w-full bg-gradient-to-r from-red-700 to-red-900 hover:from-red-600 hover:to-red-800 text-white font-bold py-3 px-4 rounded-lg shadow-lg hover:shadow-red-600/40 transition-all transform hover:-translate-y-0.5 border border-red-600/50" id="t-loginBtn">
+                Authenticate
+            </button>
 
-            <div class="pricing-card">
-                <h3 data-i18n="planMonth">1 MONTH</h3>
-                <div class="price">$10.28 <span>/ month</span></div>
-                <p class="desc" data-i18n="planMonthDesc">30 days of full premium access. Best value for regular users.</p>
-                <a href="https://discord.gg/FTnskZvg6y" target="_blank" class="btn-buy outline" data-i18n="btnPurchase">PURCHASE</a>
+            <!-- 新增的 Linkvertise 取得鑰匙按鈕 -->
+            <div class="pt-4 border-t border-red-900/30 text-center">
+                <a href="https://direct-link.net/6685298/0ENoDezHrfmz" target="_blank" rel="noopener noreferrer" 
+                   class="inline-flex items-center gap-2 text-sm text-red-400 hover:text-red-300 hover:underline font-medium transition-colors" id="t-getKey">
+                   Get a key via Linkvertise ↗
+                </a>
             </div>
-
-            <div class="pricing-card popular">
-                <div class="pricing-badge" data-i18n="badgePopular">MOST POPULAR</div>
-                <h3 data-i18n="planLifetime">LIFETIME</h3>
-                <div class="price">$16.67 <span>/ one-time</span></div>
-                <p class="desc" data-i18n="planLifetimeDesc">Pay once, enjoy forever. Permanent access to all current and future updates.</p>
-                <a href="https://discord.gg/FTnskZvg6y" target="_blank" class="btn-buy filled" data-i18n="btnPurchase">PURCHASE</a>
-            </div>
-
         </div>
-    </section>
+    </div>
 
-    <section class="discord-section">
-        <h2 data-i18n="discordTitle">JOIN OUR COMMUNITY</h2>
-        <p data-i18n="discordDesc">Get instant updates, marketplace announcements, direct support, and connect with thousands of other ONI users.</p>
-        <a href="https://discord.gg/FTnskZvg6y" target="_blank" class="btn-discord">
-            <svg width="22" height="22" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.66,1.8-1.34,2.65-2a75.58,75.58,0,0,0,65.86,0c.85.69,1.74,1.37,2.65,2a68.42,68.42,0,0,1-10.65,5.12,74.19,74.19,0,0,0,6.72,10.93,105.73,105.73,0,0,0,31.06-18.83C129.66,50.75,123.3,27.95,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
-            <span data-i18n="discordBtnText">JOIN DISCORD SERVER</span>
-        </a>
-    </section>
+    <!-- 儀表板介面 (Dashboard View - 預設隱藏) -->
+    <div id="dashboard-view" class="hidden w-full h-screen flex flex-col md:flex-row bg-[#0a0000]">
+        
+        <!-- 側邊欄 -->
+        <aside class="w-full md:w-64 bg-glass border-r border-red-900/40 flex flex-col">
+            <div class="p-6 border-b border-red-900/40">
+                <h2 class="text-3xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-red-700">ONI</h2>
+            </div>
+            <nav class="flex-1 p-4 space-y-3 mt-2">
+                <!-- Overview 按鈕 -->
+                <button onclick="switchTab('overview')" id="nav-btn-overview" class="w-full text-left px-4 py-3 bg-red-900/40 text-red-400 border-l-2 border-red-500 rounded-r-lg font-medium transition-all shadow-[inset_0_0_10px_rgba(220,38,38,0.1)]">
+                    <span id="t-navOverview">Overview</span>
+                </button>
+                <!-- Downloads 按鈕 -->
+                <button onclick="switchTab('downloads')" id="nav-btn-downloads" class="w-full text-left px-4 py-3 text-gray-400 hover:bg-red-950/30 hover:text-red-300 border-l-2 border-transparent hover:border-red-800 rounded-r-lg font-medium transition-all">
+                    <span id="t-navDownloads">Downloads</span>
+                </button>
+            </nav>
+            <div class="p-4 border-t border-red-900/40">
+                <button onclick="logout()" class="w-full px-4 py-3 bg-red-950/50 hover:bg-red-900 text-red-500 hover:text-white border border-red-900/50 rounded-lg font-bold transition-all" id="t-logout">
+                    Logout
+                </button>
+            </div>
+        </aside>
 
-    <footer>
-        © 2026 ONI EXTERNAL. ALL RIGHTS RESERVED.
-    </footer>
+        <!-- 主要內容區塊 -->
+        <main class="flex-1 p-6 lg:p-10 overflow-y-auto relative">
+            
+            <!-- Section 1: Overview (預設顯示) -->
+            <div id="section-overview" class="max-w-5xl mx-auto space-y-8 animate-fade-in">
+                
+                <!-- 歡迎頭部 -->
+                <div class="bg-glass p-8 rounded-2xl border border-red-900/30 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-red-600/10 rounded-full blur-[80px]"></div>
+                    <div class="relative z-10">
+                        <h1 class="text-3xl font-bold text-white mb-2" id="t-welcome">Welcome back, User</h1>
+                        <div class="flex items-center gap-3 mt-4">
+                            <span class="text-gray-400 font-medium" id="t-statusLabel">Subscription Status:</span>
+                            <span id="sub-status" class="px-4 py-1.5 rounded-md text-sm font-bold bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 tracking-wide">
+                                Lifetime
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 統計資料卡片 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-glass p-6 rounded-xl border border-red-900/30 hover:border-red-700/50 transition-colors">
+                        <h3 class="text-red-400/80 text-sm font-bold tracking-wider uppercase mb-1" id="t-statHwid">HWID Bound</h3>
+                        <p class="text-xl font-bold text-white font-mono">Bound (Active)</p>
+                    </div>
+                    <div class="bg-glass p-6 rounded-xl border border-red-900/30 hover:border-red-700/50 transition-colors">
+                        <h3 class="text-red-400/80 text-sm font-bold tracking-wider uppercase mb-1" id="t-statVersion">Latest Version</h3>
+                        <p class="text-xl font-bold text-white font-mono text-red-100">v1.3.4 (External)</p>
+                    </div>
+                    <div class="bg-glass p-6 rounded-xl border border-red-900/30 hover:border-red-700/50 transition-colors">
+                        <h3 class="text-red-400/80 text-sm font-bold tracking-wider uppercase mb-1" id="t-statLogin">Last Login</h3>
+                        <p class="text-xl font-bold text-white font-mono" id="current-time">Just now</p>
+                    </div>
+                </div>
+
+                <!-- 最新公告 -->
+                <div class="bg-glass p-8 rounded-2xl border border-red-900/30 min-h-[250px]">
+                    <h3 class="text-xl font-bold text-white mb-6 border-b border-red-900/30 pb-3" id="t-announcements">System Announcements</h3>
+                    <div class="space-y-4 text-gray-300 text-sm">
+                        <div class="p-5 bg-black/40 rounded-lg border-l-4 border-red-600">
+                            <p class="font-bold text-red-400 mb-1 text-base">[Update] ONI External v1.3.4 Released</p>
+                            <p id="t-announceText">The latest version is now available in the Downloads tab. Choose between the Auto-Updating EXE or the Manual ZIP version.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Downloads (預設隱藏) -->
+            <div id="section-downloads" class="hidden max-w-5xl mx-auto space-y-8 animate-fade-in">
+                
+                <div class="mb-8 border-b border-red-900/30 pb-4">
+                    <h1 class="text-3xl font-bold text-white" id="t-dlHeader">Downloads Center</h1>
+                    <p class="text-gray-400 mt-2" id="t-dlSubheader">Get the latest version: v1.3.4 (External)</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- EXE 下載卡片 -->
+                    <div class="bg-glass p-8 rounded-2xl border border-red-600/40 relative overflow-hidden group hover:shadow-[0_0_30px_rgba(220,38,38,0.2)] transition-all">
+                        <div class="absolute top-0 right-0 p-4">
+                            <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider" id="t-recommended">Recommended</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2" id="t-exeTitle">ONI External (EXE)</h3>
+                        <p class="text-gray-400 mb-6 min-h-[40px]" id="t-exeDesc">This version includes a built-in auto-updater. It will automatically keep your software up to date.</p>
+                        
+                        <a href="https://github.com/johnny66687lol3-sketch/ONI-Update-external/raw/refs/heads/main/ONI_External.exe" target="_blank" class="block w-full text-center bg-red-700 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-colors border border-red-500" id="t-exeBtn">
+                            Download .EXE
+                        </a>
+                    </div>
+
+                    <!-- ZIP 下載卡片 -->
+                    <div class="bg-glass p-8 rounded-2xl border border-red-900/50 relative overflow-hidden hover:border-red-700/50 transition-all">
+                        <h3 class="text-2xl font-bold text-gray-200 mb-2" id="t-zipTitle">ONI External (ZIP)</h3>
+                        <p class="text-gray-500 mb-6 min-h-[40px]" id="t-zipDesc">Portable archive version. This version DOES NOT auto-update. You must manually download new versions.</p>
+                        
+                        <a href="https://github.com/johnny66687lol3-sketch/ONI-Update-external/releases/download/V100/ONI.External.zip" target="_blank" class="block w-full text-center bg-gray-800 hover:bg-gray-700 text-gray-200 font-bold py-3 px-4 rounded-lg transition-colors border border-gray-600" id="t-zipBtn">
+                            Download .ZIP
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
 
     <script>
+        // --- 鑰匙資料庫 ---
+        const validKeys = {
+            "ONI_24dbe4fdc3f8110b08a1fe9e56e477cc159833c31ca6fcbcf2b924e865e108b9": "perm",
+            "TTR_ddc9ecd8-ff94-472f-b6c8-3e604522d5b7": "perm",
+            "ONI_Club_2kYbx0eJCLmGvUgXTJEPAMAntexnABWa": "perm",
+            "8550a5e51a22f4": "free"
+        };
+
+        // --- 語言翻譯字典 ---
         const translations = {
-            "en": {
-                "navStore": "Store",
-                "heroBadge": "ONI EXTERNAL RELEASED",
-                "heroTitlePrefix": "PURE",
-                "heroTitleHighlight": "PERFORMANCE.",
-                "heroDesc": "The most stable visual and aim enhancement tool. Designed for absolute precision, uncompromised safety, and ultimate smooth mouse compensation.",
-                "loaderTitle": "LOADER INTERFACE",
-                "menuTitle": "MAIN INTERFACE",
-                "feat1Title": "PRECISE AIMBOT",
-                "feat1Desc": "Customizable FOV ranges and target bone selection. Advanced curve smoothing for seamless mouse prediction.",
-                "feat2Title": "CLEAN VISUALS",
-                "feat2Desc": "Optimized high-refresh-rate external overlay that does not drop your frames.",
-                "feat3Title": "FAST UPDATE ",
-                "feat3Desc": "Game patches happen. We ship a fix within hours, often the same day.",
-                "pricingTitle": "CHOOSE YOUR PLAN",
-                "planFree": "FREE",
-                "planFreeDesc": "Requires Key System to access basic features. Ad-supported.",
-                "btnGetKey": "GET KEY",
-                "planWeek": "1 WEEK",
-                "planWeekDesc": "7 days of full premium access. Perfect for trying out all features.",
-                "planMonth": "1 MONTH",
-                "planMonthDesc": "30 days of full premium access. Best value for regular users.",
-                "badgePopular": "MOST POPULAR",
-                "planLifetime": "LIFETIME",
-                "planLifetimeDesc": "Pay once, enjoy forever. Permanent access to all current and future updates.",
-                "btnPurchase": "PURCHASE",
-                "discordTitle": "JOIN OUR COMMUNITY",
-                "discordDesc": "Get instant updates, marketplace announcements, direct support, and connect with thousands of other ONI users.",
-                "discordBtnText": "JOIN DISCORD SERVER"
+            en: {
+                title: "ONI Club",
+                subtitle: "Authentication Portal",
+                enterKey: "Enter your License Key",
+                loginBtn: "Authenticate",
+                invalidKey: "Invalid key! Please try again.",
+                getKey: "Get a key via Linkvertise ↗",
+                navOverview: "Overview",
+                navDownloads: "Downloads",
+                logout: "System Logout",
+                welcome: "Welcome back, User",
+                statusLabel: "License Status:",
+                statHwid: "HWID Bound",
+                statVersion: "Current Version",
+                statLogin: "Last Login",
+                announcements: "Announcements",
+                announceText: "Updated for version-ddf602d9cfe44005",
+                statusPerm: "Lifetime Access",
+                statusFree: "Free Tier",
+                dlHeader: "Downloads Center",
+                dlSubheader: "Get the latest version: v1.3.4 (External)",
+                recommended: "Recommended",
+                exeTitle: "ONI External (EXE)",
+                exeDesc: "This version includes a built-in auto-updater. It will automatically keep your software up to date.",
+                exeBtn: "Download .EXE",
+                zipTitle: "ONI External (ZIP)",
+                zipDesc: "Portable archive version. This version DOES NOT auto-update. You must manually download new versions.",
+                zipBtn: "Download .ZIP"
             },
-            "zh": {
-                "navStore": "商店",
-                "heroBadge": "ONI EXTERNAL 全新發布",
-                "heroTitlePrefix": "極致",
-                "heroTitleHighlight": "效能展現",
-                "heroDesc": "提供最穩定的系統整合與視覺輔助功能。專為絕對精準、毫秒級滑鼠平滑補償與毫不妥協的安全性而生。",
-                "loaderTitle": "載入器介面",
-                "menuTitle": "主選單介面",
-                "feat1Title": "精準平滑 Aimbot",
-                "feat1Desc": "支援自訂 FOV 範圍與目標部位選擇。搭載進階平滑曲線，提供最真實的滑鼠預測。",
-                "feat2Title": "高幀率 Visuals",
-                "feat2Desc": "極低延遲的外部視覺覆蓋層，支援高更新率螢幕，完全不干擾原生遊戲畫面。",
-                "feat3Title": "快速更新",
-                "feat3Desc": "遊戲補丁會定期發布。我們會在數小時內，通常當天就會發布修復程序。",
-                "pricingTitle": "選擇你的方案",
-                "planFree": "免費方案",
-                "planFreeDesc": "要用鑰匙系統才可以用。Key將會重置在每個禮拜五。",
-                "btnGetKey": "獲取鑰匙",
-                "planWeek": "One Week 方案",
-                "planWeekDesc": "7 天完整高級權限，適合短期體驗所有功能。",
-                "planMonth": "One Month 方案",
-                "planMonthDesc": "30 天完整高級權限，最受常規玩家歡迎的選擇。",
-                "badgePopular": "最受歡迎",
-                "planLifetime": "LIFETIME 方案",
-                "planLifetimeDesc": "一次付費，永久使用。享有未來所有版本更新。",
-                "btnPurchase": "立即購買",
-                "discordTitle": "加入官方社群",
-                "discordDesc": "獲取即時更新通知、版本公告、直接的技術支援，並與數千名 ONI 玩家一齊交流體驗。",
-                "discordBtnText": "加入 DISCORD 伺服器"
+            zh: {
+                title: "ONI Club",
+                subtitle: "身份驗證系統",
+                enterKey: "請輸入您的授權密鑰 (License Key)",
+                loginBtn: "驗證進入",
+                invalidKey: "無效的密鑰！請檢查後重試。",
+                getKey: "透過 Linkvertise 取得密鑰 ↗",
+                navOverview: "系統總覽",
+                navDownloads: "下載中心",
+                logout: "登出系統",
+                welcome: "歡迎回來，使用者",
+                statusLabel: "授權狀態：",
+                statHwid: "硬體綁定 (HWID)",
+                statVersion: "目前版本",
+                statLogin: "最後登入",
+                announcements: "最新公告",
+                announceText: "外部輔助已更新到version-ddf602d9cfe44005",
+                statusPerm: "永久授權 (Lifetime)",
+                statusFree: "免費體驗方案",
+                dlHeader: "下載中心",
+                dlSubheader: "取得最新版本: v1.3.4 (External)",
+                recommended: "強烈推薦",
+                exeTitle: "ONI External (自動更新版 EXE)",
+                exeDesc: "此版本內建自動更新程序，開啟後會自動檢查並更新至最新版本，免去手動覆蓋的麻煩。",
+                exeBtn: "下載 .EXE 程式",
+                zipTitle: "ONI External (手動更新版 ZIP)",
+                zipDesc: "免安裝壓縮檔版本。注意：此版本不會自動更新，未來若有新版本需自行返回此處下載覆蓋。",
+                zipBtn: "下載 .ZIP 壓縮檔"
             }
         };
 
-        function changeLanguage() {
-            const lang = document.getElementById("languageSelect").value;
-            const elements = document.querySelectorAll("[data-i18n]");
-            
-            elements.forEach(el => {
-                const key = el.getAttribute("data-i18n");
-                if (translations[lang][key]) {
-                    if (el.tagName.toLowerCase() === 'input' && el.type === 'placeholder') {
-                        el.placeholder = translations[lang][key];
-                    } else {
-                        el.innerHTML = translations[lang][key];
-                    }
-                }
-            });
-        }
-        
-        // 初始載入語言
-        document.addEventListener('DOMContentLoaded', () => {
-            changeLanguage();
+        let currentLang = 'en';
+        let currentUserType = null;
+
+        // 語言切換事件
+        document.getElementById('lang-switch').addEventListener('change', (e) => {
+            currentLang = e.target.value;
+            updateLanguage();
         });
+
+        // 執行翻譯替換
+        function updateLanguage() {
+            const t = translations[currentLang];
+            document.getElementById('t-title').innerText = t.title;
+            document.getElementById('t-subtitle').innerText = t.subtitle;
+            document.getElementById('t-enterKey').innerText = t.enterKey;
+            document.getElementById('t-loginBtn').innerText = t.loginBtn;
+            document.getElementById('t-getKey').innerText = t.getKey;
+            document.getElementById('t-navOverview').innerText = t.navOverview;
+            document.getElementById('t-navDownloads').innerText = t.navDownloads;
+            document.getElementById('t-logout').innerText = t.logout;
+            document.getElementById('t-welcome').innerText = t.welcome;
+            document.getElementById('t-statusLabel').innerText = t.statusLabel;
+            document.getElementById('t-statHwid').innerText = t.statHwid;
+            document.getElementById('t-statVersion').innerText = t.statVersion;
+            document.getElementById('t-statLogin').innerText = t.statLogin;
+            document.getElementById('t-announcements').innerText = t.announcements;
+            document.getElementById('t-announceText').innerText = t.announceText;
+            
+            // 下載頁面翻譯
+            document.getElementById('t-dlHeader').innerText = t.dlHeader;
+            document.getElementById('t-dlSubheader').innerText = t.dlSubheader;
+            document.getElementById('t-recommended').innerText = t.recommended;
+            document.getElementById('t-exeTitle').innerText = t.exeTitle;
+            document.getElementById('t-exeDesc').innerText = t.exeDesc;
+            document.getElementById('t-exeBtn').innerText = t.exeBtn;
+            document.getElementById('t-zipTitle').innerText = t.zipTitle;
+            document.getElementById('t-zipDesc').innerText = t.zipDesc;
+            document.getElementById('t-zipBtn').innerText = t.zipBtn;
+
+            updateStatusTagUI();
+        }
+
+        // 登入驗證邏輯
+        function authenticate() {
+            const inputKey = document.getElementById('key-input').value.trim();
+            const errorMsg = document.getElementById('error-msg');
+            const authView = document.getElementById('auth-view');
+            const dashboardView = document.getElementById('dashboard-view');
+            const body = document.body;
+
+            if (validKeys[inputKey]) {
+                currentUserType = validKeys[inputKey];
+                errorMsg.classList.add('hidden');
+                
+                authView.classList.add('hidden');
+                body.classList.remove('items-center', 'justify-center');
+                dashboardView.classList.remove('hidden');
+
+                updateStatusTagUI();
+                
+                // 設定登入時間
+                const now = new Date();
+                document.getElementById('current-time').innerText = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+                
+                // 預設切換到 Overview
+                switchTab('overview');
+            } else {
+                errorMsg.innerText = translations[currentLang].invalidKey;
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        // 更新訂閱狀態標籤
+        function updateStatusTagUI() {
+            if(!currentUserType) return;
+            
+            const subStatus = document.getElementById('sub-status');
+            const t = translations[currentLang];
+
+            if (currentUserType === 'perm') {
+                subStatus.innerText = t.statusPerm;
+                subStatus.className = "px-4 py-1.5 rounded-md text-sm font-bold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 tracking-wide shadow-[0_0_10px_rgba(234,179,8,0.3)]";
+            } else {
+                subStatus.innerText = t.statusFree;
+                subStatus.className = "px-4 py-1.5 rounded-md text-sm font-bold bg-gray-600/30 text-gray-400 border border-gray-600/50 tracking-wide";
+            }
+        }
+
+        // 側邊欄分頁切換邏輯
+        function switchTab(tabId) {
+            document.getElementById('section-overview').classList.add('hidden');
+            document.getElementById('section-downloads').classList.add('hidden');
+            
+            document.getElementById('section-' + tabId).classList.remove('hidden');
+
+            const btnOverview = document.getElementById('nav-btn-overview');
+            const btnDownloads = document.getElementById('nav-btn-downloads');
+            
+            const inactiveClass = ['text-gray-400', 'hover:bg-red-950/30', 'hover:text-red-300', 'border-transparent', 'hover:border-red-800'];
+            const activeClass = ['bg-red-900/40', 'text-red-400', 'border-red-500', 'shadow-[inset_0_0_10px_rgba(220,38,38,0.1)]'];
+
+            btnOverview.classList.remove(...activeClass);
+            btnOverview.classList.add(...inactiveClass);
+            btnDownloads.classList.remove(...activeClass);
+            btnDownloads.classList.add(...inactiveClass);
+
+            const targetBtn = document.getElementById('nav-btn-' + tabId);
+            targetBtn.classList.remove(...inactiveClass);
+            targetBtn.classList.add(...activeClass);
+        }
+
+        // 登出邏輯
+        function logout() {
+            const authView = document.getElementById('auth-view');
+            const dashboardView = document.getElementById('dashboard-view');
+            const body = document.body;
+
+            document.getElementById('key-input').value = '';
+            currentUserType = null;
+
+            dashboardView.classList.add('hidden');
+            body.classList.add('items-center', 'justify-center');
+            authView.classList.remove('hidden');
+        }
+
+        // 初始化
+        updateLanguage();
     </script>
 </body>
 </html>
