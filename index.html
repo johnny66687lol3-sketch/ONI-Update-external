@@ -9,12 +9,12 @@
     <style>
         /* 自定義滾動條與紅色發光特效 */
         body {
-            background-color: #0d0000; /* 深邃紅黑色 */
+            background-color: #0d0000;
             color: #ffffff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         .glow-effect {
-            box-shadow: 0 0 20px rgba(220, 38, 38, 0.4); /* 紅色發光 */
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
         }
         .bg-glass {
             background: rgba(25, 5, 5, 0.75);
@@ -34,6 +34,14 @@
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #b91c1c;
+        }
+        /* 彈出視窗動畫 */
+        .modal-enter {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
@@ -76,7 +84,7 @@
                 Authenticate
             </button>
 
-            <!-- 新增的 Linkvertise 取得鑰匙按鈕 -->
+            <!-- Linkvertise 取得鑰匙按鈕 -->
             <div class="pt-4 border-t border-red-900/30 text-center">
                 <a href="https://direct-link.net/6685298/0ENoDezHrfmz" target="_blank" rel="noopener noreferrer" 
                    class="inline-flex items-center gap-2 text-sm text-red-400 hover:text-red-300 hover:underline font-medium transition-colors" id="t-getKey">
@@ -86,20 +94,18 @@
         </div>
     </div>
 
-    <!-- 儀表板介面 (Dashboard View - 預設隱藏) -->
+    <!-- 儀表板介面 (Dashboard View) -->
     <div id="dashboard-view" class="hidden w-full h-screen flex flex-col md:flex-row bg-[#0a0000]">
         
         <!-- 側邊欄 -->
-        <aside class="w-full md:w-64 bg-glass border-r border-red-900/40 flex flex-col">
+        <aside class="w-full md:w-64 bg-glass border-r border-red-900/40 flex flex-col z-10">
             <div class="p-6 border-b border-red-900/40">
                 <h2 class="text-3xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-red-700">ONI</h2>
             </div>
             <nav class="flex-1 p-4 space-y-3 mt-2">
-                <!-- Overview 按鈕 -->
                 <button onclick="switchTab('overview')" id="nav-btn-overview" class="w-full text-left px-4 py-3 bg-red-900/40 text-red-400 border-l-2 border-red-500 rounded-r-lg font-medium transition-all shadow-[inset_0_0_10px_rgba(220,38,38,0.1)]">
                     <span id="t-navOverview">Overview</span>
                 </button>
-                <!-- Downloads 按鈕 -->
                 <button onclick="switchTab('downloads')" id="nav-btn-downloads" class="w-full text-left px-4 py-3 text-gray-400 hover:bg-red-950/30 hover:text-red-300 border-l-2 border-transparent hover:border-red-800 rounded-r-lg font-medium transition-all">
                     <span id="t-navDownloads">Downloads</span>
                 </button>
@@ -112,12 +118,11 @@
         </aside>
 
         <!-- 主要內容區塊 -->
-        <main class="flex-1 p-6 lg:p-10 overflow-y-auto relative">
+        <main class="flex-1 p-6 lg:p-10 overflow-y-auto relative z-0">
             
-            <!-- Section 1: Overview (預設顯示) -->
-            <div id="section-overview" class="max-w-5xl mx-auto space-y-8 animate-fade-in">
+            <!-- Section 1: Overview -->
+            <div id="section-overview" class="max-w-5xl mx-auto space-y-8">
                 
-                <!-- 歡迎頭部 -->
                 <div class="bg-glass p-8 rounded-2xl border border-red-900/30 relative overflow-hidden">
                     <div class="absolute top-0 right-0 w-64 h-64 bg-red-600/10 rounded-full blur-[80px]"></div>
                     <div class="relative z-10">
@@ -131,7 +136,6 @@
                     </div>
                 </div>
 
-                <!-- 統計資料卡片 -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-glass p-6 rounded-xl border border-red-900/30 hover:border-red-700/50 transition-colors">
                         <h3 class="text-red-400/80 text-sm font-bold tracking-wider uppercase mb-1" id="t-statHwid">HWID Bound</h3>
@@ -147,7 +151,6 @@
                     </div>
                 </div>
 
-                <!-- 最新公告 -->
                 <div class="bg-glass p-8 rounded-2xl border border-red-900/30 min-h-[250px]">
                     <h3 class="text-xl font-bold text-white mb-6 border-b border-red-900/30 pb-3" id="t-announcements">System Announcements</h3>
                     <div class="space-y-4 text-gray-300 text-sm">
@@ -159,8 +162,8 @@
                 </div>
             </div>
 
-            <!-- Section 2: Downloads (預設隱藏) -->
-            <div id="section-downloads" class="hidden max-w-5xl mx-auto space-y-8 animate-fade-in">
+            <!-- Section 2: Downloads -->
+            <div id="section-downloads" class="hidden max-w-5xl mx-auto space-y-8">
                 
                 <div class="mb-8 border-b border-red-900/30 pb-4">
                     <h1 class="text-3xl font-bold text-white" id="t-dlHeader">Downloads Center</h1>
@@ -170,32 +173,71 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     
                     <!-- EXE 下載卡片 -->
-                    <div class="bg-glass p-8 rounded-2xl border border-red-600/40 relative overflow-hidden group hover:shadow-[0_0_30px_rgba(220,38,38,0.2)] transition-all">
-                        <div class="absolute top-0 right-0 p-4">
-                            <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider" id="t-recommended">Recommended</span>
+                    <div class="bg-glass p-8 rounded-2xl border border-red-600/40 relative overflow-hidden group hover:shadow-[0_0_30px_rgba(220,38,38,0.2)] transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider" id="t-recommended">Recommended</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2" id="t-exeTitle">ONI External (EXE)</h3>
+                            <p class="text-gray-400 mb-6 min-h-[60px]" id="t-exeDesc">This version includes a built-in auto-updater. It will automatically keep your software up to date.</p>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-2" id="t-exeTitle">ONI External (EXE)</h3>
-                        <p class="text-gray-400 mb-6 min-h-[40px]" id="t-exeDesc">This version includes a built-in auto-updater. It will automatically keep your software up to date.</p>
                         
-                        <a href="https://github.com/johnny66687lol3-sketch/ONI-Update-external/raw/refs/heads/main/ONI_External.exe" target="_blank" class="block w-full text-center bg-red-700 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-colors border border-red-500" id="t-exeBtn">
+                        <!-- 點擊觸發免責聲明 -->
+                        <button onclick="showDisclaimer('https://github.com/johnny66687lol3-sketch/ONI-Update-external/raw/refs/heads/main/ONI_External.exe')" class="w-full text-center bg-red-700 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-colors border border-red-500" id="t-exeBtn">
                             Download .EXE
-                        </a>
+                        </button>
                     </div>
 
                     <!-- ZIP 下載卡片 -->
-                    <div class="bg-glass p-8 rounded-2xl border border-red-900/50 relative overflow-hidden hover:border-red-700/50 transition-all">
-                        <h3 class="text-2xl font-bold text-gray-200 mb-2" id="t-zipTitle">ONI External (ZIP)</h3>
-                        <p class="text-gray-500 mb-6 min-h-[40px]" id="t-zipDesc">Portable archive version. This version DOES NOT auto-update. You must manually download new versions.</p>
+                    <div class="bg-glass p-8 rounded-2xl border border-red-900/50 relative overflow-hidden hover:border-red-700/50 transition-all flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-200 mb-2" id="t-zipTitle">ONI External (ZIP)</h3>
+                            <p class="text-gray-500 mb-6 min-h-[60px]" id="t-zipDesc">Portable archive version. This version DOES NOT auto-update. You must manually download new versions.</p>
+                        </div>
                         
-                        <a href="https://github.com/johnny66687lol3-sketch/ONI-Update-external/releases/download/V100/ONI.External.zip" target="_blank" class="block w-full text-center bg-gray-800 hover:bg-gray-700 text-gray-200 font-bold py-3 px-4 rounded-lg transition-colors border border-gray-600" id="t-zipBtn">
+                        <!-- 點擊觸發免責聲明 -->
+                        <button onclick="showDisclaimer('https://github.com/johnny66687lol3-sketch/ONI-Update-external/releases/download/V100/ONI.External.zip')" class="w-full text-center bg-gray-800 hover:bg-gray-700 text-gray-200 font-bold py-3 px-4 rounded-lg transition-colors border border-gray-600" id="t-zipBtn">
                             Download .ZIP
-                        </a>
+                        </button>
                     </div>
 
                 </div>
             </div>
 
         </main>
+    </div>
+
+    <!-- 免責聲明 Modal (預設隱藏) -->
+    <div id="disclaimer-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm">
+        <div class="bg-glass max-w-lg w-full p-8 rounded-2xl border border-red-600/50 glow-effect modal-enter relative shadow-[0_0_40px_rgba(220,38,38,0.3)] mx-4">
+            
+            <!-- 警告圖標與標題 -->
+            <div class="flex items-center gap-3 mb-6 border-b border-red-900/50 pb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <h2 class="text-2xl font-bold text-white tracking-wider" id="t-discTitle">Disclaimer</h2>
+            </div>
+            
+            <!-- 內容 -->
+            <div class="text-gray-300 text-sm leading-relaxed space-y-4 max-h-[50vh] overflow-y-auto pr-2" id="t-discText">
+                <p>ONI Club Software, its team, and its affiliates do not condone or support any form of cheating, illegal activity, or malicious behavior.</p>
+                <p>ONI External is a robust IDE (Integrated Development Environment) designed exclusively for game developers to test their Roblox games privately—without requiring a live update for all players.</p>
+                <p>ONI Club Software, its team, and its affiliates are not affiliated with Roblox or The Roblox Corporation.</p>
+                <p>For any legal concerns or DMCA notices, please contact <a href="mailto:johnny66687lol2@gmail.com" class="text-red-400 hover:underline">johnny66687lol2@gmail.com</a> or <a href="mailto:johnny66687lol3@gmail.com" class="text-red-400 hover:underline">johnny66687lol3@gmail.com</a></p>
+            </div>
+
+            <!-- 按鈕區 -->
+            <div class="mt-8 flex gap-4">
+                <button onclick="hideDisclaimer()" class="flex-1 py-3 px-4 bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold rounded-lg border border-gray-600 transition-colors" id="t-discCancel">
+                    Cancel
+                </button>
+                <button onclick="confirmDownload()" class="flex-1 py-3 px-4 bg-red-700 hover:bg-red-600 text-white font-bold rounded-lg border border-red-500 shadow-lg shadow-red-900/50 transition-colors" id="t-discConfirm">
+                    I Agree & Download
+                </button>
+            </div>
+
+        </div>
     </div>
 
     <script>
@@ -236,7 +278,18 @@
                 exeBtn: "Download .EXE",
                 zipTitle: "ONI External (ZIP)",
                 zipDesc: "Portable archive version. This version DOES NOT auto-update. You must manually download new versions.",
-                zipBtn: "Download .ZIP"
+                zipBtn: "Download .ZIP",
+                
+                // Modal 翻譯
+                discTitle: "Disclaimer",
+                discText: `
+                    <p>ONI Club Software, its team, and its affiliates do not condone or support any form of cheating, illegal activity, or malicious behavior.</p>
+                    <p>ONI External is a robust IDE (Integrated Development Environment) designed exclusively for game developers to test their Roblox games privately—without requiring a live update for all players.</p>
+                    <p>ONI Club Software, its team, and its affiliates are not affiliated with Roblox or The Roblox Corporation.</p>
+                    <p>For any legal concerns or DMCA notices, please contact <a href="mailto:johnny66687lol2@gmail.com" class="text-red-400 hover:underline">johnny66687lol2@gmail.com</a> or <a href="mailto:johnny66687lol3@gmail.com" class="text-red-400 hover:underline">johnny66687lol3@gmail.com</a></p>
+                `,
+                discCancel: "Cancel",
+                discConfirm: "I Agree & Download"
             },
             zh: {
                 title: "ONI Club",
@@ -265,12 +318,24 @@
                 exeBtn: "下載 .EXE 程式",
                 zipTitle: "ONI External (手動更新版 ZIP)",
                 zipDesc: "免安裝壓縮檔版本。注意：此版本不會自動更新，未來若有新版本需自行返回此處下載覆蓋。",
-                zipBtn: "下載 .ZIP 壓縮檔"
+                zipBtn: "下載 .ZIP 壓縮檔",
+
+                // Modal 翻譯
+                discTitle: "免責聲明",
+                discText: `
+                    <p>ONI Club 軟體、其團隊及附屬機構不容許或支持任何形式的作弊、非法活動或惡意行為。</p>
+                    <p>ONI External 是一個強大的 IDE (整合開發環境)，專為遊戲開發者設計，讓他們能夠私下測試自己的 Roblox 遊戲，而無需對所有玩家進行實時更新。</p>
+                    <p>ONI Club 軟體、其團隊及附屬機構與 Roblox 或 The Roblox Corporation 沒有任何隸屬關係。</p>
+                    <p>如有任何法律疑慮或 DMCA 通知，請聯絡 <a href="mailto:johnny66687lol2@gmail.com" class="text-red-400 hover:underline">johnny66687lol2@gmail.com</a> 或 <a href="mailto:johnny66687lol3@gmail.com" class="text-red-400 hover:underline">johnny66687lol3@gmail.com</a></p>
+                `,
+                discCancel: "取消",
+                discConfirm: "我同意並下載"
             }
         };
 
         let currentLang = 'en';
         let currentUserType = null;
+        let pendingDownloadUrl = ''; // 儲存準備要下載的連結
 
         // 語言切換事件
         document.getElementById('lang-switch').addEventListener('change', (e) => {
@@ -297,7 +362,7 @@
             document.getElementById('t-announcements').innerText = t.announcements;
             document.getElementById('t-announceText').innerText = t.announceText;
             
-            // 下載頁面翻譯
+            // 下載頁面
             document.getElementById('t-dlHeader').innerText = t.dlHeader;
             document.getElementById('t-dlSubheader').innerText = t.dlSubheader;
             document.getElementById('t-recommended').innerText = t.recommended;
@@ -307,6 +372,12 @@
             document.getElementById('t-zipTitle').innerText = t.zipTitle;
             document.getElementById('t-zipDesc').innerText = t.zipDesc;
             document.getElementById('t-zipBtn').innerText = t.zipBtn;
+
+            // Modal 翻譯
+            document.getElementById('t-discTitle').innerText = t.discTitle;
+            document.getElementById('t-discText').innerHTML = t.discText;
+            document.getElementById('t-discCancel').innerText = t.discCancel;
+            document.getElementById('t-discConfirm').innerText = t.discConfirm;
 
             updateStatusTagUI();
         }
@@ -329,11 +400,9 @@
 
                 updateStatusTagUI();
                 
-                // 設定登入時間
                 const now = new Date();
                 document.getElementById('current-time').innerText = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
                 
-                // 預設切換到 Overview
                 switchTab('overview');
             } else {
                 errorMsg.innerText = translations[currentLang].invalidKey;
@@ -341,13 +410,10 @@
             }
         }
 
-        // 更新訂閱狀態標籤
         function updateStatusTagUI() {
             if(!currentUserType) return;
-            
             const subStatus = document.getElementById('sub-status');
             const t = translations[currentLang];
-
             if (currentUserType === 'perm') {
                 subStatus.innerText = t.statusPerm;
                 subStatus.className = "px-4 py-1.5 rounded-md text-sm font-bold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 tracking-wide shadow-[0_0_10px_rgba(234,179,8,0.3)]";
@@ -357,11 +423,10 @@
             }
         }
 
-        // 側邊欄分頁切換邏輯
+        // 側邊欄切換
         function switchTab(tabId) {
             document.getElementById('section-overview').classList.add('hidden');
             document.getElementById('section-downloads').classList.add('hidden');
-            
             document.getElementById('section-' + tabId).classList.remove('hidden');
 
             const btnOverview = document.getElementById('nav-btn-overview');
@@ -388,10 +453,29 @@
 
             document.getElementById('key-input').value = '';
             currentUserType = null;
+            pendingDownloadUrl = '';
 
             dashboardView.classList.add('hidden');
             body.classList.add('items-center', 'justify-center');
             authView.classList.remove('hidden');
+        }
+
+        // --- 免責聲明 Modal 邏輯 ---
+        function showDisclaimer(url) {
+            pendingDownloadUrl = url;
+            document.getElementById('disclaimer-modal').classList.remove('hidden');
+        }
+
+        function hideDisclaimer() {
+            document.getElementById('disclaimer-modal').classList.add('hidden');
+            pendingDownloadUrl = '';
+        }
+
+        function confirmDownload() {
+            if(pendingDownloadUrl) {
+                window.open(pendingDownloadUrl, '_blank');
+            }
+            hideDisclaimer();
         }
 
         // 初始化
